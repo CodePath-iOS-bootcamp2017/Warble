@@ -57,7 +57,7 @@ class User: NSObject {
             self.name = name
         }
         
-        if let handle = dictionary.value(forKey: "name") as? String{
+        if let handle = dictionary.value(forKey: "screen_name") as? String{
             self.handle = handle
         }
         
@@ -65,7 +65,7 @@ class User: NSObject {
             self.followersCount = followersCount
         }
         
-        if let backgroundImageUrlString = dictionary.value(forKey: "profile_image_url_https") as? String{
+        if let backgroundImageUrlString = dictionary.value(forKey: "profile_banner_url") as? String{
             if let backgroundImageUrl = URL(string: backgroundImageUrlString){
                 self.backgroundImageUrl = backgroundImageUrl
             }
@@ -88,5 +88,6 @@ class User: NSObject {
         if let bio = dictionary.value(forKey: "description") as? String{
             self.bio = bio
         }
+        
     }
 }

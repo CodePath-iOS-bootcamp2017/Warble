@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    var tweets:[Tweet]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +26,10 @@ class HomeViewController: UIViewController {
     func loadFromNetwork(){
         TwitterClient.sharedInstance?.getHomeTimelineTweets(success: { (tweets: [NSDictionary]) in
             print(tweets)
+            self.tweets = Tweet.createTweetArray(dictionaryArray: tweets)
+//            for tweet in self.tweets!{
+//                print(tweet.text)
+//            }
         }, failure: { (error: Error) in
             print(error.localizedDescription)
         })
