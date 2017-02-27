@@ -24,9 +24,12 @@ class User: NSObject {
     class var currentUser: User?{
         get{
             if(_currentUser == nil){
+                
                 let defaults = UserDefaults.standard
-                if let data = defaults.object(forKey: "currentUserData") as? Data{
-                    if let currentUserDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary{
+//                defaults.removeObject(forKey: "currentUserData")
+                let data = defaults.object(forKey: "currentUserData") as? Data
+                if let data = data{
+                    if let currentUserDictionary = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary{
                         let user = User(dictionary: currentUserDictionary)
                         self._currentUser = user
                     }
@@ -41,7 +44,7 @@ class User: NSObject {
                 let data = try! JSONSerialization.data(withJSONObject: user.userDictionary!, options: [])
                 defaults.set(data, forKey: "currentUserData")
             }else{
-                defaults.set(nil, forKey: "currentUserData")
+                defaults.removeObject(forKey: "currentUserData")
             }
             defaults.synchronize()
         }

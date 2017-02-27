@@ -29,6 +29,10 @@ class HomeViewController: UIViewController {
         })
     }
     
+    
+    @IBAction func onLogoutTapped(_ sender: Any) {
+        TwitterClient.sharedInstance?.logoutCurrentUser()
+    }
 
     /*
     // MARK: - Navigation

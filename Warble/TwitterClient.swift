@@ -76,4 +76,12 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure(error)
          })
     }
+    
+    func logoutCurrentUser(){
+        User.currentUser = nil
+        TwitterClient.sharedInstance?.deauthorize()
+        print("User successfully logged out")
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "User_Logged_out"), object: nil)
+    }
 }

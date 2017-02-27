@@ -25,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController
             window?.rootViewController = vc
         }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "User_Logged_out"), object: nil, queue: OperationQueue.main) { (Notification) in
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()
+            self.window?.rootViewController = vc
+        }
         return true
     }
 

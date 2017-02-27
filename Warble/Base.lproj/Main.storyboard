@@ -57,7 +57,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FPm-kZ-Rac"/>
+                    <navigationItem key="navigationItem" id="FPm-kZ-Rac">
+                        <barButtonItem key="leftBarButtonItem" title="logout" id="G30-ut-jSG">
+                            <connections>
+                                <action selector="onLogoutTapped:" destination="C6p-SW-XPG" id="7rI-lK-F1E"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2k4-Uu-HYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
