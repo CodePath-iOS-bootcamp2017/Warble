@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        if User.currentUser == nil{
+            print("no current user")
+        }else{
+            print("there is a user")
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController
+            window?.rootViewController = vc
+        }
         return true
     }
 
@@ -44,6 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("inside application open url")
+        TwitterClient.sharedInstance?.handleUrl(url: url)
+        return true
+    }
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

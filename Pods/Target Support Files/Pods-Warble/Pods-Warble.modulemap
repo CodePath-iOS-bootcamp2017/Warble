@@ -1,0 +1,6 @@
+framework module Pods_Warble {
+  umbrella header "Pods-Warble-umbrella.h"
+
+  export *
+  module * { export * }
+}
