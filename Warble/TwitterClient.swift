@@ -64,6 +64,30 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func getHomeTimelineTweetsBefore(id: String, success:@escaping (_ response: [NSDictionary])->Void, failure: @escaping (_ error: Error) -> Void){
+        let parameters: [String: Any] = ["max_id": id as Any]
+        TwitterClient.sharedInstance?.get("1.1/statuses/home_timeline.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            //            print(task.debugDescription)
+            if let tweets = response as? [NSDictionary]{
+                success(tweets)
+            }
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
+    func getHomeTimelineTweetsAfter(id: String, success:@escaping (_ response: [NSDictionary])->Void, failure: @escaping (_ error: Error) -> Void){
+        let parameters: [String: Any] = ["since_id": id as Any]
+        TwitterClient.sharedInstance?.get("1.1/statuses/home_timeline.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            //            print(task.debugDescription)
+            if let tweets = response as? [NSDictionary]{
+                success(tweets)
+            }
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
     func getCurrentAccountDetails(success: @escaping (User) -> Void, failure: @escaping (Error)->Void){
          TwitterClient.sharedInstance?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
          if let res = response as? NSDictionary{

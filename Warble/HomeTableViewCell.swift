@@ -41,16 +41,49 @@ class HomeTableViewCell: UITableViewCell {
                 self.tweetLabel.text = tweetText
             }
             
-            if let timestamp = tweet?.timestamp?.description{
-                self.timestampLabel.text = timestamp
+            if let timestamp = tweet?.timestamp{
+                self.timestampLabel.text = Date().offsetFrom(timestamp)
             }
             
             if let retweetCount = tweet?.retweetCount{
-                self.retweetCountLabel.text = "\(retweetCount)"
+                if retweetCount > 0{
+                    retweetCountLabel.isHidden = false
+                    self.retweetCountLabel.text = "\(retweetCount)"
+                }else{
+                    retweetCountLabel.isHidden = true
+                }
+                
             }
             
             if let favoriteCount = tweet?.favoriteCount{
-                self.favoriteCountLabel.text = "\(favoriteCount)"
+                
+                if favoriteCount > 0{
+                    self.favoriteCountLabel.isHidden = false
+                    self.favoriteCountLabel.text = "\(favoriteCount)"
+                }else{
+                    self.favoriteCountLabel.isHidden = true
+                }
+            }
+            
+            if let favorited = tweet?.favorited{
+                if favorited{
+                    self.favoriteImageView.image = UIImage(named: "favor-icon-red")
+                }
+            }
+            
+            if let retweeted = tweet?.retweeted{
+                if retweeted{
+                    self.retweetImageView.image = UIImage(named: "retweet-icon-green")
+                }
+            }
+            
+            if let retweetedUser = tweet?.retweetedBy{
+                self.retweetedLabel.text = "\(retweetedUser.name!) retweeted"
+                self.retweetedLabel.isHidden = false
+                self.retweetedImageView.isHidden = false
+            }else{
+                self.retweetedLabel.isHidden = true
+                self.retweetedImageView.isHidden = true
             }
         }
     }
@@ -65,4 +98,39 @@ class HomeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension Date {
+    func yearsFrom(_ date:Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.year, from: date, to: self, options: []).year!
+    }
+    func monthsFrom(_ date:Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.month, from: date, to: self, options: []).month!
+    }
+    func weeksFrom(_ date:Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.weekOfYear, from: date, to: self, options: []).weekOfYear!
+    }
+    func daysFrom(_ date:Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.day, from: date, to: self, options: []).day!
+    }
+    func hoursFrom(_ date:Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.hour, from: date, to: self, options: []).hour!
+    }
+    func minutesFrom(_ date:Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.minute, from: date, to: self, options: []).minute!
+    }
+    func secondsFrom(_ date:Date) -> Int{
+        return (Calendar.current as NSCalendar).components(.second, from: date, to: self, options: []).second!
+    }
+    func offsetFrom(_ date:Date) -> String {
+        
+        if yearsFrom(date)   > 0 { return "\(yearsFrom(date))y"   }
+        if monthsFrom(date)  > 0 { return "\(monthsFrom(date))M"  }
+        if weeksFrom(date)   > 0 { return "\(weeksFrom(date))w"   }
+        if daysFrom(date)    > 0 { return "\(daysFrom(date))d"    }
+        if hoursFrom(date)   > 0 { return "\(hoursFrom(date))h"   }
+        if minutesFrom(date) > 0 { return "\(minutesFrom(date))m" }
+        if secondsFrom(date) > 0 { return "\(secondsFrom(date))s" }
+        return ""
+    }
 }
