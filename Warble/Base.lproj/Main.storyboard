@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,9 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFt-Jv-iUE">
-                                <rect key="frame" x="109" y="522" width="157" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFt-Jv-iUE">
+                                <rect key="frame" x="56" y="522" width="262.5" height="30"/>
                                 <color key="backgroundColor" red="0.47878939623235339" green="0.81008062932486924" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Login with Twitter">
                                     <color key="titleColor" red="1" green="0.99019163349999995" blue="0.96362418480000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -32,8 +32,21 @@
                                     <action selector="onLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E8U-vf-KG5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warble" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lye-ZC-1Qy">
+                                <rect key="frame" x="136" y="104" width="102" height="55"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="34"/>
+                                <color key="textColor" red="0.23539247534216864" green="0.53401432901083146" blue="0.774854274611399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Lye-ZC-1Qy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="84" id="36x-ZR-ZYG"/>
+                            <constraint firstItem="aFt-Jv-iUE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Bu-g4-Wmt"/>
+                            <constraint firstItem="aFt-Jv-iUE" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="A0m-FX-k6X"/>
+                            <constraint firstItem="Lye-ZC-1Qy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mTK-T6-zRr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aFt-Jv-iUE" secondAttribute="bottom" constant="115" id="pl1-zH-U1X"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kHu-wT-k9r"/>
                     <connections>
@@ -44,7 +57,7 @@
             </objects>
             <point key="canvasLocation" x="1140" y="-559.07046476761627"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Warble-->
         <scene sceneID="Ejh-VM-HZk">
             <objects>
                 <viewController id="C6p-SW-XPG" customClass="HomeViewController" customModule="Warble" customModuleProvider="target" sceneMemberID="viewController">
@@ -201,11 +214,15 @@
                             <constraint firstAttribute="trailing" secondItem="Tgx-Xz-aQ9" secondAttribute="trailing" id="vD5-A0-Lw9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="FPm-kZ-Rac">
+                    <navigationItem key="navigationItem" title="Warble" id="FPm-kZ-Rac">
                         <barButtonItem key="leftBarButtonItem" title="logout" id="G30-ut-jSG">
+                            <color key="tintColor" red="1" green="0.99019163349999995" blue="0.96362418480000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="onLogoutTapped:" destination="C6p-SW-XPG" id="7rI-lK-F1E"/>
                             </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="edit-icon" id="HI2-kw-quG">
+                            <color key="tintColor" red="1" green="0.99019163349999995" blue="0.96362418480000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -236,6 +253,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon-gray" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>

@@ -24,6 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.setupHomeTableView()
         self.configureInfiniteLoadProgressIndicator()
         self.configureRehreshControl()
+        navigationController?.navigationBar.barTintColor = UIColor(red: 0.3, green: 0.5, blue: 0.8, alpha: 1.0)
     }
 
     override func didReceiveMemoryWarning() {
