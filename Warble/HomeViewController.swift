@@ -52,7 +52,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func configureRehreshControl(){
         self.refreshControl.addTarget(self, action: #selector(refreshContent(_:)), for: UIControlEvents.valueChanged)
         self.refreshControl.tintColor = UIColor.red
-        self.businessTableView.insertSubview(refreshControl, at: 0)
+        self.homeTableView.insertSubview(refreshControl, at: 0)
+    }
+    
+    func refreshContent(_ refreshControl: UIRefreshControl){
+        self.loadFromNetwork()
+        refreshControl.endRefreshing()
     }
     
     func loadFromNetwork(){
