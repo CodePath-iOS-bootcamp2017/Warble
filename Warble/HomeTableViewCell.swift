@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CellDelegate {
+    func onTapCellLike(_ sender: AnyObject?)
+    func onTapCellRetweet(_ sender: AnyObject?)
+}
+
 class HomeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
@@ -22,6 +27,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
+    
+    var delegate: CellDelegate?
     
     var tweet:Tweet?{
         didSet{
@@ -68,12 +75,16 @@ class HomeTableViewCell: UITableViewCell {
             if let favorited = tweet?.favorited{
                 if favorited{
                     self.favoriteImageView.image = UIImage(named: "favor-icon-red")
+                }else{
+                    self.favoriteImageView.image = UIImage(named: "favor-icon-gray")
                 }
             }
             
             if let retweeted = tweet?.retweeted{
                 if retweeted{
                     self.retweetImageView.image = UIImage(named: "retweet-icon-green")
+                }else{
+                    self.retweetImageView.image = UIImage(named: "retweet-icon")
                 }
             }
             
@@ -89,7 +100,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.configureGestureRecognizers()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -97,7 +108,25 @@ class HomeTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func configureGestureRecognizers(){
+        let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(tappedRetweet(_:)))
+        self.retweetImageView.addGestureRecognizer(tapRetweet)
+        self.retweetImageView.isUserInteractionEnabled = true
+        
+        let tapLike = UITapGestureRecognizer(target: self, action: #selector(tappedLike(_:)))
+        self.favoriteImageView.addGestureRecognizer(tapLike)
+        self.favoriteImageView.isUserInteractionEnabled = true
+    }
+    
+    func tappedRetweet(_ sender: AnyObject){
+        delegate?.onTapCellRetweet(sender)
+    }
+    
+    func tappedLike(_ sender: AnyObject){
+        delegate?.onTapCellLike(sender)
+        
+    }
 }
 
 extension Date {

@@ -101,6 +101,52 @@ class TwitterClient: BDBOAuth1SessionManager {
          })
     }
     
+    func retweet(id: String, success:@escaping (_ response: NSDictionary)->Void, failure: @escaping (_ error: Error) -> Void){
+        let parameters: [String: Any] = ["id": id as Any]
+        TwitterClient.sharedInstance?.post("1.1/statuses/retweet.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            if let tweet = response as? NSDictionary{
+                success(tweet)
+            }
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
+    func unretweet(id: String, success:@escaping (_ response: NSDictionary)->Void, failure: @escaping (_ error: Error) -> Void){
+        let parameters: [String: Any] = ["id": id as Any]
+        TwitterClient.sharedInstance?.post("1.1/statuses/unretweet.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            if let tweet = response as? NSDictionary{
+                success(tweet)
+            }
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
+    func createFavorites(id: String, success:@escaping (_ response: NSDictionary)->Void, failure: @escaping (_ error: Error) -> Void){
+        let parameters: [String: Any] = ["id": id]
+//        print(parameters)
+        TwitterClient.sharedInstance?.post("1.1/favorites/create.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            if let tweet = response as? NSDictionary{
+                success(tweet)
+            }
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
+    
+    func destroyFavorites(id: String, success:@escaping (_ response: NSDictionary)->Void, failure: @escaping (_ error: Error) -> Void){
+        let parameters: [String: Any] = ["id": id as Any]
+        TwitterClient.sharedInstance?.post("1.1/favorites/destroy.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            if let tweet = response as? NSDictionary{
+                success(tweet)
+            }
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
     func logoutCurrentUser(){
         User.currentUser = nil
         TwitterClient.sharedInstance?.deauthorize()

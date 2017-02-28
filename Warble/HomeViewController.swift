@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, CellDelegate {
 
     
     @IBOutlet weak var homeTableView: UITableView!
@@ -23,6 +23,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.loadFromNetwork()
         self.setupHomeTableView()
         self.configureInfiniteLoadProgressIndicator()
+        self.configureRehreshControl()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +52,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func configureRehreshControl(){
         self.refreshControl.addTarget(self, action: #selector(refreshContent(_:)), for: UIControlEvents.valueChanged)
-        self.refreshControl.tintColor = UIColor.red
+        self.refreshControl.tintColor = UIColor.blue
         self.homeTableView.insertSubview(refreshControl, at: 0)
     }
     
@@ -99,6 +100,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as! HomeTableViewCell
         cell.tweet = self.tweets?[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -121,6 +123,73 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func onLogoutTapped(_ sender: Any) {
         TwitterClient.sharedInstance?.logoutCurrentUser()
+    }
+    
+    func onTapCellLike(_ sender: AnyObject?) {
+//        print("onTapCellLike")
+        if let recognizer = sender as? UITapGestureRecognizer{
+            let imageView = recognizer.view
+            if let cellView = imageView?.superview?.superview as? HomeTableViewCell {
+                let indexPath = self.homeTableView.indexPath(for: cellView)
+                if let row = indexPath?.row{
+                    if let tweet = self.tweets?[row]{
+//                        print("processing tweet id: \(tweet.id)")
+                        if tweet.favorited! {
+                            //self.tweets![(indexPath?.row)!].liked = false
+                            TwitterClient.sharedInstance?.destroyFavorites(id: tweet.id!, success: { (dictionary: NSDictionary) in
+                                self.tweets?[(indexPath?.row)!].favorited = false
+                                self.tweets?[(indexPath?.row)!].favoriteCount = (self.tweets?[(indexPath?.row)!].favoriteCount)! - 1
+                                self.homeTableView.reloadData()
+                            }, failure: { (error: Error) in
+                                print(error.localizedDescription)
+                            })
+                        }else{
+                            TwitterClient.sharedInstance?.createFavorites(id: tweet.id!, success: { (dictionary: NSDictionary) in
+                                self.tweets?[(indexPath?.row)!].favorited = true
+                                self.tweets?[(indexPath?.row)!].favoriteCount = (self.tweets?[(indexPath?.row)!].favoriteCount)! + 1
+                                self.homeTableView.reloadData()
+                            }, failure: { (error: Error) in
+                                print(error.localizedDescription)
+                            })
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func onTapCellRetweet(_ sender: AnyObject?){
+        if let recognizer = sender as? UITapGestureRecognizer{
+            let imageView = recognizer.view
+            if let cellView = imageView?.superview?.superview as? HomeTableViewCell {
+                let indexPath = self.homeTableView.indexPath(for: cellView)
+                if let row = indexPath?.row{
+                    if let tweet = self.tweets?[row]{
+                        //                        print("processing tweet id: \(tweet.id)")
+                        if tweet.retweeted! {
+                            //self.tweets![(indexPath?.row)!].liked = false
+                            TwitterClient.sharedInstance?.unretweet(id: tweet.id!, success: { (dictionary: NSDictionary) in
+                                self.tweets?[(indexPath?.row)!].retweeted = false
+                                self.tweets?[(indexPath?.row)!].retweetCount = (self.tweets?[(indexPath?.row)!].retweetCount)! - 1
+                                self.homeTableView.reloadData()
+                            }, failure: { (error: Error) in
+                                print(error.localizedDescription)
+                            })
+                        }else{
+                            TwitterClient.sharedInstance?.retweet(id: tweet.id!, success: { (dictionary: NSDictionary) in
+                                self.tweets?[(indexPath?.row)!].retweeted = true
+                                self.tweets?[(indexPath?.row)!].retweetCount = (self.tweets?[(indexPath?.row)!].retweetCount)! + 1
+                                self.homeTableView.reloadData()
+                            }, failure: { (error: Error) in
+                                print(error.localizedDescription)
+                            })
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /*
