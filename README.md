@@ -23,6 +23,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Time stamp to nearest and best units e.g. 12s or 1m or 1day
+- [x] User can see the Retweeted by field in the table view cell
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
