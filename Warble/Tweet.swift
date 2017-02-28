@@ -15,8 +15,19 @@ class Tweet: NSObject {
     var retweetCount: Int?
     var favoriteCount: Int?
     var imageUrl: URL?
+    var retweetedBy: User?
     
     init(dictionary: NSDictionary){
+        /*
+        if let retweetDictionary = dictionary.value(forKey: "retweeted_status") as? NSDictionary{
+            if let retweetedByUserDictionary = dictionary.value(forKey: "user") as? NSDictionary{
+                self.retweetedBy = User(dictionary: retweetedByUserDictionary)
+            }
+            
+            dictionary = retweetDictionary
+        }
+        */
+        
         if let userDictionary = dictionary.value(forKey: "user") as? NSDictionary{
             self.user = User(dictionary: userDictionary)
         }

@@ -8,14 +8,17 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    @IBOutlet weak var homeTableView: UITableView!
+    
     var tweets:[Tweet]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.loadFromNetwork()
+        self.setupHomeTableView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,18 +26,39 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setupHomeTableView(){
+        self.homeTableView.delegate = self
+        self.homeTableView.dataSource = self
+        self.homeTableView.rowHeight = UITableViewAutomaticDimension
+        self.homeTableView.estimatedRowHeight = 120
+    }
+    
     func loadFromNetwork(){
         TwitterClient.sharedInstance?.getHomeTimelineTweets(success: { (tweets: [NSDictionary]) in
-            print(tweets)
+            // print(tweets)
             self.tweets = Tweet.createTweetArray(dictionaryArray: tweets)
 //            for tweet in self.tweets!{
 //                print(tweet.text)
 //            }
+            self.homeTableView.reloadData()
         }, failure: { (error: Error) in
             print(error.localizedDescription)
         })
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.tweets == nil{
+            return 0
+        }else{
+            return (self.tweets?.count)!
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as! HomeTableViewCell
+        cell.tweet = self.tweets?[indexPath.row]
+        return cell
+    }
     
     @IBAction func onLogoutTapped(_ sender: Any) {
         TwitterClient.sharedInstance?.logoutCurrentUser()

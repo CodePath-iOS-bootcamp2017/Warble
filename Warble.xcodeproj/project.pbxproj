@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240A0BC01E650A4100834A86 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240A0BBF1E650A4100834A86 /* HomeTableViewCell.swift */; };
 		243506921E638850005B01B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243506911E638850005B01B6 /* User.swift */; };
 		243506941E63885D005B01B6 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243506931E63885D005B01B6 /* Tweet.swift */; };
 		245CDF051E62042800AAD8C4 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDF041E62042800AAD8C4 /* TwitterClient.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		028310EE1F3A86A9DC7D0F32 /* Pods-Warble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Warble/Pods-Warble.debug.xcconfig"; sourceTree = "<group>"; };
 		0F710056501C8304F7FD27DB /* Pods-Warble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Warble/Pods-Warble.release.xcconfig"; sourceTree = "<group>"; };
+		240A0BBF1E650A4100834A86 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		243506911E638850005B01B6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		243506931E63885D005B01B6 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		245CDF041E62042800AAD8C4 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		24F397E11E5D2229005839AA /* views */ = {
 			isa = PBXGroup;
 			children = (
+				240A0BBF1E650A4100834A86 /* HomeTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				243506941E63885D005B01B6 /* Tweet.swift in Sources */,
 				24F397CD1E5D209A005839AA /* AppDelegate.swift in Sources */,
 				24F397D51E5D209A005839AA /* Warble.xcdatamodeld in Sources */,
+				240A0BC01E650A4100834A86 /* HomeTableViewCell.swift in Sources */,
 				24F397E61E5D2277005839AA /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
