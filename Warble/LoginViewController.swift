@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
                     self.authorizationUrl = authorizeUrl
                     self.performSegue(withIdentifier: "authorizationSegue", sender: sender)
                 }else{
-                    print("Can't open mobile safari! Invalid authorization url.")
+                    print("Can't open web view! Invalid authorization url.")
                 }
             }
         }, failure: { (error: Error) in
