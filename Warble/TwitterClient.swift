@@ -14,31 +14,24 @@ class TwitterClient: BDBOAuth1SessionManager {
     var successfulLogin: (() -> Void)?
     var failedLogin: ((Error) -> Void)?
     
-    func loginToTwitter(success: @escaping ()->Void, failure: @escaping (Error)->Void){
-        successfulLogin = success
-        failedLogin = failure
-        
-        TwitterClient.sharedInstance?.deauthorize()
-        
+    func getRequestToken(success: @escaping (BDBOAuth1Credential) -> Void, failure: @escaping (Error) -> Void){
         print("Fetching request token...")
+        TwitterClient.sharedInstance?.deauthorize()
         TwitterClient.sharedInstance?.fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "warble://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential?) in
             print("Got request token!")
-            if let oauth_token = requestToken?.token{
-                if let authorizeUrl = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(oauth_token)"){
-                    UIApplication.shared.open(authorizeUrl , options: [:], completionHandler: { (isSuccessful: Bool) in
-                        print("Launched mobile safari for user authorization!")
-                    })
-                }else{
-                    print("Can't open mobile safari! Invalid authorization url.")
-                }
-            }
+            success(requestToken!)
         }, failure: { (error: Error?) in
-            print("Error fetching request token: \(error.debugDescription)")
+            failure(error!)
         })
     }
     
+    func setupLoginCallbacks(success: @escaping ()->Void, failure: @escaping (Error)->Void){
+        self.successfulLogin = success
+        self.failedLogin = failure
+    }
+    
     func handleUrl(url: URL){
-        print("User authorization successful")
+        print("User authorization successful!")
         
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         print("Fetching access token...")

@@ -10,6 +10,39 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Authorization View Controller-->
+        <scene sceneID="S5B-TD-s4R">
+            <objects>
+                <viewController id="Tv8-w9-M1F" customClass="AuthorizationViewController" customModule="Warble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zDr-nf-cyG"/>
+                        <viewControllerLayoutGuide type="bottom" id="YVa-Lx-4MJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JyV-UL-UoB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DP-v0-y00">
+                                <rect key="frame" x="9.5" y="16.5" width="356" height="634"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91717169730497305" green="0.98696308353773043" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="7DP-v0-y00" firstAttribute="width" secondItem="JyV-UL-UoB" secondAttribute="width" multiplier="0.95" id="Aqj-H8-7ho"/>
+                            <constraint firstItem="7DP-v0-y00" firstAttribute="centerY" secondItem="JyV-UL-UoB" secondAttribute="centerY" id="DIn-wR-Yg9"/>
+                            <constraint firstItem="7DP-v0-y00" firstAttribute="height" secondItem="JyV-UL-UoB" secondAttribute="height" multiplier="0.95" id="f1k-BF-Zld"/>
+                            <constraint firstItem="7DP-v0-y00" firstAttribute="centerX" secondItem="JyV-UL-UoB" secondAttribute="centerX" id="pYy-4g-k8B"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="authorizationWebView" destination="7DP-v0-y00" id="6Cf-YO-Md9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="egK-r2-YJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2120.8000000000002" y="-1265.217391304348"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -51,6 +84,7 @@
                     <navigationItem key="navigationItem" id="kHu-wT-k9r"/>
                     <connections>
                         <segue destination="OD6-T0-yhK" kind="presentation" identifier="successfulLoginSegue" id="95V-39-ByC"/>
+                        <segue destination="Tv8-w9-M1F" kind="presentation" identifier="authorizationSegue" id="wan-ed-rjt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

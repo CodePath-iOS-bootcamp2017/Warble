@@ -41,7 +41,7 @@ class HomeTableViewCell: UITableViewCell {
             }
             
             if let handle = tweet?.user?.handle{
-                self.handleLabel.text = handle
+                self.handleLabel.text = "@\(handle)"
             }
             
             if let tweetText = tweet?.text{
