@@ -140,6 +140,18 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func getStatus(id: String, success:@escaping (_ response: NSDictionary)->Void, failure: @escaping (_ error: Error) -> Void){
+        let parameters: [String: Any] = ["id": id as Any]
+        print(parameters)
+        TwitterClient.sharedInstance?.get("1.1/statuses/show.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            if let tweet = response as? NSDictionary{
+                success(tweet)
+            }
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
     func logoutCurrentUser(){
         User.currentUser = nil
         TwitterClient.sharedInstance?.deauthorize()

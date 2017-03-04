@@ -27,6 +27,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var mediaImageView: UIImageView!
     
     var delegate: CellDelegate?
     
@@ -34,6 +35,8 @@ class HomeTableViewCell: UITableViewCell {
         didSet{
             if let profileImageUrl = tweet?.user?.profileImageUrl{
                 self.profileImageView.setImageWith(profileImageUrl)
+                self.profileImageView.layer.cornerRadius = 5
+                self.profileImageView.layer.masksToBounds = true
             }
             
             if let name = tweet?.user?.name{
@@ -95,6 +98,15 @@ class HomeTableViewCell: UITableViewCell {
             }else{
                 self.retweetedLabel.isHidden = true
                 self.retweetedImageView.isHidden = true
+            }
+            
+            if let mediaUrl = tweet?.imageUrl{
+//                print("media available")
+                self.mediaImageView.isHidden = false
+                self.mediaImageView.setImageWith(mediaUrl)
+            }else{
+//                print("media unavailable")
+                self.mediaImageView.isHidden = true
             }
         }
     }

@@ -72,8 +72,8 @@ class Tweet: NSObject {
             }
             
             if let entities = dictionary.value(forKey: "entities") as? NSDictionary{
-                if let media = entities.value(forKey: "media") as? NSDictionary{
-                    if let imageUrlString = media.value(forKey: "media_url_https") as? String{
+                if let media = entities.value(forKey: "media") as? [NSDictionary]{
+                    if let imageUrlString = media[0].value(forKey: "media_url_https") as? String{
                         if let imageUrl = URL(string: imageUrlString){
                             self.imageUrl = imageUrl
                         }

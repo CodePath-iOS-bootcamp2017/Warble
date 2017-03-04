@@ -13,6 +13,7 @@
 		243506941E63885D005B01B6 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243506931E63885D005B01B6 /* Tweet.swift */; };
 		245CDF051E62042800AAD8C4 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDF041E62042800AAD8C4 /* TwitterClient.swift */; };
 		24EDB25A1E6649EF005E4D41 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EDB2591E6649EF005E4D41 /* AuthorizationViewController.swift */; };
+		24EDB25C1E666571005E4D41 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EDB25B1E666571005E4D41 /* DetailsViewController.swift */; };
 		24F397CD1E5D209A005839AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F397CC1E5D209A005839AA /* AppDelegate.swift */; };
 		24F397D21E5D209A005839AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24F397D01E5D209A005839AA /* Main.storyboard */; };
 		24F397D51E5D209A005839AA /* Warble.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24F397D31E5D209A005839AA /* Warble.xcdatamodeld */; };
@@ -32,6 +33,7 @@
 		243506931E63885D005B01B6 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		245CDF041E62042800AAD8C4 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		24EDB2591E6649EF005E4D41 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		24EDB25B1E666571005E4D41 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		24F397C91E5D209A005839AA /* Warble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24F397CC1E5D209A005839AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24F397D11E5D209A005839AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				24F397E51E5D2277005839AA /* HomeViewController.swift */,
 				24F397E71E5D2CBB005839AA /* LoginViewController.swift */,
 				24EDB2591E6649EF005E4D41 /* AuthorizationViewController.swift */,
+				24EDB25B1E666571005E4D41 /* DetailsViewController.swift */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				240A0BC21E65317E00834A86 /* InfiniteScrollActivityView.swift in Sources */,
 				245CDF051E62042800AAD8C4 /* TwitterClient.swift in Sources */,
 				24F397E81E5D2CBB005839AA /* LoginViewController.swift in Sources */,
+				24EDB25C1E666571005E4D41 /* DetailsViewController.swift in Sources */,
 				243506921E638850005B01B6 /* User.swift in Sources */,
 				243506941E63885D005B01B6 /* Tweet.swift in Sources */,
 				24F397CD1E5D209A005839AA /* AppDelegate.swift in Sources */,

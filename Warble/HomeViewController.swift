@@ -105,6 +105,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if !self.isLoadingMoreData{
             let totalHeight = self.homeTableView.contentSize.height
@@ -193,14 +197,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "detailsSegue" {
+            let cell = sender as! HomeTableViewCell
+            let index = self.homeTableView.indexPath(for: cell)
+            
+            let vc = segue.destination as! DetailsViewController
+            vc.tweet = self.tweets?[(index?.row)!]
+        }
     }
-    */
+    
 
 }
