@@ -13,6 +13,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var homeTableView: UITableView!
     
+    
     var tweets:[Tweet]?
     var isLoadingMoreData = false
     var loadingMoreProgressIndicator = InfiniteScrollActivityView()
@@ -130,10 +131,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func onLogoutTapped(_ sender: Any) {
-        TwitterClient.sharedInstance?.logoutCurrentUser()
-    }
-    
     func onTapCellLike(_ sender: AnyObject?) {
 //        print("onTapCellLike")
         if let recognizer = sender as? UITapGestureRecognizer{
@@ -200,7 +197,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-
+    
+    
     
     // MARK: - Navigation
 

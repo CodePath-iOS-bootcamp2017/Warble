@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		240A0BC01E650A4100834A86 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240A0BBF1E650A4100834A86 /* HomeTableViewCell.swift */; };
 		240A0BC21E65317E00834A86 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240A0BC11E65317E00834A86 /* InfiniteScrollActivityView.swift */; };
+		242BD2F71E6B42B300F74E60 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242BD2F61E6B42B300F74E60 /* ComposeViewController.swift */; };
+		242BD2F91E6B431900F74E60 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242BD2F81E6B431900F74E60 /* ProfileViewController.swift */; };
 		243506921E638850005B01B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243506911E638850005B01B6 /* User.swift */; };
 		243506941E63885D005B01B6 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243506931E63885D005B01B6 /* Tweet.swift */; };
 		245CDF051E62042800AAD8C4 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDF041E62042800AAD8C4 /* TwitterClient.swift */; };
@@ -29,6 +31,8 @@
 		0F710056501C8304F7FD27DB /* Pods-Warble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Warble/Pods-Warble.release.xcconfig"; sourceTree = "<group>"; };
 		240A0BBF1E650A4100834A86 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		240A0BC11E65317E00834A86 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
+		242BD2F61E6B42B300F74E60 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		242BD2F81E6B431900F74E60 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		243506911E638850005B01B6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		243506931E63885D005B01B6 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		245CDF041E62042800AAD8C4 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 				24F397E71E5D2CBB005839AA /* LoginViewController.swift */,
 				24EDB2591E6649EF005E4D41 /* AuthorizationViewController.swift */,
 				24EDB25B1E666571005E4D41 /* DetailsViewController.swift */,
+				242BD2F61E6B42B300F74E60 /* ComposeViewController.swift */,
+				242BD2F81E6B431900F74E60 /* ProfileViewController.swift */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -273,12 +279,14 @@
 				240A0BC21E65317E00834A86 /* InfiniteScrollActivityView.swift in Sources */,
 				245CDF051E62042800AAD8C4 /* TwitterClient.swift in Sources */,
 				24F397E81E5D2CBB005839AA /* LoginViewController.swift in Sources */,
+				242BD2F71E6B42B300F74E60 /* ComposeViewController.swift in Sources */,
 				24EDB25C1E666571005E4D41 /* DetailsViewController.swift in Sources */,
 				243506921E638850005B01B6 /* User.swift in Sources */,
 				243506941E63885D005B01B6 /* Tweet.swift in Sources */,
 				24F397CD1E5D209A005839AA /* AppDelegate.swift in Sources */,
 				24F397D51E5D209A005839AA /* Warble.xcdatamodeld in Sources */,
 				240A0BC01E650A4100834A86 /* HomeTableViewCell.swift in Sources */,
+				242BD2F91E6B431900F74E60 /* ProfileViewController.swift in Sources */,
 				24EDB25A1E6649EF005E4D41 /* AuthorizationViewController.swift in Sources */,
 				24F397E61E5D2277005839AA /* HomeViewController.swift in Sources */,
 			);

@@ -12,6 +12,7 @@ class User: NSObject {
     var name: String?
     var handle: String?
     var followersCount: Int?
+    var followingCount: Int?
     var backgroundImageUrl: URL?
     var statusesCount: Int?
     var profileImageUrl: URL?
@@ -63,6 +64,10 @@ class User: NSObject {
         
         if let followersCount = dictionary.value(forKey: "followers_count") as? Int{
             self.followersCount = followersCount
+        }
+        
+        if let followingCount = dictionary.value(forKey: "friends_count") as? Int{
+            self.followingCount = followingCount
         }
         
         if let backgroundImageUrlString = dictionary.value(forKey: "profile_banner_url") as? String{
