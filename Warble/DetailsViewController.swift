@@ -28,6 +28,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
     @IBOutlet weak var bottomMostView: UIView!
     
     var tweet: Tweet?
+    var sourceRowNumber: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,14 +165,25 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
     }
     
     func onFavoriteTapped(_ sender: AnyObject){
-        print("onFavoriteTapped")
+//        print("onFavoriteTapped")
         if let favorited = self.tweet?.favorited{
             if favorited{
-                self.tweet?.favorited = false
-                self.favoriteImageView.image = UIImage(named: "favor-icon-gray")
+                TwitterClient.sharedInstance?.destroyFavorites(id: (self.tweet?.id)!, success: { (dictionary: NSDictionary) in
+                    print("favorite destroyed: \((self.tweet?.id)!)")
+                    self.tweet?.favorited = false
+                    self.favoriteImageView.image = UIImage(named: "favor-icon-gray")
+                }, failure: { (error: Error) in
+                    print("Error destorying favorite: \(error.localizedDescription)")
+                })
+                
             }else{
-                self.tweet?.favorited = true
-                self.favoriteImageView.image = UIImage(named: "favor-icon-red")
+                TwitterClient.sharedInstance?.createFavorites(id: (self.tweet?.id)!, success: { (dictionary: NSDictionary) in
+                    print("favorite created: \((self.tweet?.id)!)")
+                    self.tweet?.favorited = true
+                    self.favoriteImageView.image = UIImage(named: "favor-icon-red")
+                }, failure: { (error: Error) in
+                    print("Error creating favorite: \(error.localizedDescription)")
+                })
             }
         }
     }
@@ -179,14 +191,35 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
     func onRetweetTapped(_ sender: Any){
         if let retweeted = self.tweet?.retweeted{
             if retweeted{
-                self.tweet?.retweeted = false
-                self.retweetImageView.image = UIImage(named: "retweet-icon")
+                TwitterClient.sharedInstance?.unretweet(id: (self.tweet?.id)!, success: { (dictionary: NSDictionary) in
+                    print("retweet destroyed: \((self.tweet?.id)!)")
+                    self.tweet?.retweeted = false
+                    self.retweetImageView.image = UIImage(named: "retweet-icon")
+                }, failure: { (error: Error) in
+                    print("Error destroying retweeted: \(error.localizedDescription)")
+                })
+                
             }else{
-                self.tweet?.retweeted = true
-                self.retweetImageView.image = UIImage(named: "retweet-icon-green")
+                TwitterClient.sharedInstance?.retweet(id: (self.tweet?.id)!, success: { (dictionary: NSDictionary) in
+                    print("retweet created: \((self.tweet?.id)!)")
+                    self.tweet?.retweeted = true
+                    self.retweetImageView.image = UIImage(named: "retweet-icon-green")
+                }, failure: { (error: Error) in
+                    print("Error creating retweet: \(error.localizedDescription)")
+                })
+                
             }
         }
     }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let vc = viewController as? HomeViewController{
+            if let row = self.sourceRowNumber{
+                vc.tweets?[row] = self.tweet!
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

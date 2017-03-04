@@ -26,6 +26,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.configureRehreshControl()
         navigationController?.navigationBar.barTintColor = UIColor(red: 0.3, green: 0.5, blue: 0.8, alpha: 1.0)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.homeTableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -208,6 +212,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let vc = segue.destination as! DetailsViewController
             vc.tweet = self.tweets?[(index?.row)!]
+            vc.sourceRowNumber = index?.row
         }
     }
     
