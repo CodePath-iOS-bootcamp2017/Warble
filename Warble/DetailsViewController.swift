@@ -182,6 +182,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
                     print("favorite destroyed: \((self.tweet?.id)!)")
                     self.tweet?.favorited = false
                     self.favoriteImageView.image = UIImage(named: "favor-icon-gray")
+                    self.decrementFavoriteCount()
                 }, failure: { (error: Error) in
                     print("Error destorying favorite: \(error.localizedDescription)")
                 })
@@ -191,10 +192,25 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
                     print("favorite created: \((self.tweet?.id)!)")
                     self.tweet?.favorited = true
                     self.favoriteImageView.image = UIImage(named: "favor-icon-red")
+                    self.incrementFavoriteCount()
                 }, failure: { (error: Error) in
                     print("Error creating favorite: \(error.localizedDescription)")
                 })
             }
+        }
+    }
+    
+    func incrementFavoriteCount(){
+        self.tweet?.favoriteCount = (self.tweet?.favoriteCount)!+1
+        if let favoriteCount = self.tweet?.favoriteCount{
+            self.favoriteCountLabel.text = "\(favoriteCount)"
+        }
+    }
+    
+    func decrementFavoriteCount(){
+        self.tweet?.favoriteCount = (self.tweet?.favoriteCount)!-1
+        if let favoriteCount = self.tweet?.favoriteCount{
+            self.favoriteCountLabel.text = "\(favoriteCount)"
         }
     }
     
@@ -205,6 +221,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
                     print("retweet destroyed: \((self.tweet?.id)!)")
                     self.tweet?.retweeted = false
                     self.retweetImageView.image = UIImage(named: "retweet-icon")
+                    self.decrementRetweetCount()
                 }, failure: { (error: Error) in
                     print("Error destroying retweeted: \(error.localizedDescription)")
                 })
@@ -214,11 +231,26 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
                     print("retweet created: \((self.tweet?.id)!)")
                     self.tweet?.retweeted = true
                     self.retweetImageView.image = UIImage(named: "retweet-icon-green")
+                    self.incrementRetweetCount()
                 }, failure: { (error: Error) in
                     print("Error creating retweet: \(error.localizedDescription)")
                 })
                 
             }
+        }
+    }
+    
+    func incrementRetweetCount(){
+        self.tweet?.retweetCount = (self.tweet?.retweetCount)!+1
+        if let retweetCount = self.tweet?.retweetCount{
+            self.retweetCountLabel.text = "\(retweetCount)"
+        }
+    }
+    
+    func decrementRetweetCount(){
+        self.tweet?.retweetCount = (self.tweet?.retweetCount)!-1
+        if let retweetCount = self.tweet?.retweetCount{
+            self.retweetCountLabel.text = "\(retweetCount)"
         }
     }
     
