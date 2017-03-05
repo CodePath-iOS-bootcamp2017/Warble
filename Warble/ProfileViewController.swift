@@ -75,6 +75,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             showingUser = user
         }else{
             self.user = User.currentUser
+            self.addLogoutButton()
         }
         
         if let user = showingUser{
@@ -93,7 +94,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             
             if let handle = user.handle{
-                self.handleLabel.text = handle
+                self.handleLabel.text = "@\(handle)"
             }
             
             if let tweetCount = user.statusesCount{
@@ -108,6 +109,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.followerCountLabel.text = self.formatNumber(number: followerCount)
             }
         }
+    }
+    
+    func addLogoutButton(){
+        
+        let logoutButton = UIButton()
+        logoutButton.setTitle("logout", for: UIControlState.normal)
+        logoutButton.frame = CGRect(x: 0, y: 0, width: 80, height: 25)
+        logoutButton.addTarget(self, action: #selector(onLogoutTapped(_:)), for: UIControlEvents.touchDown)
+        logoutButton.isUserInteractionEnabled = true
+        
+        
+        let rightBarButton = UIBarButtonItem()
+        rightBarButton.customView = logoutButton
+        self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
     func formatNumber(number: Int) -> String{
@@ -155,7 +170,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    @IBAction func onLogoutTapped(_ sender: Any) {
+    func onLogoutTapped(_ sender: Any) {
         TwitterClient.sharedInstance?.logoutCurrentUser()
     }
     

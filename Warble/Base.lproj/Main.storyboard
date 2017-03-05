@@ -590,11 +590,6 @@
                                 <action selector="onCloseTapped:" destination="C0d-0X-gWS" id="jsq-f9-3Pw"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="logout" id="SnW-bQ-Np0">
-                            <connections>
-                                <action selector="onLogoutTapped:" destination="C0d-0X-gWS" id="XW4-10-X5q"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="coverImageView" destination="EXK-pz-FdX" id="Anr-ME-ioj"/>

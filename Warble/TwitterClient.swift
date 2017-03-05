@@ -47,8 +47,9 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func getHomeTimelineTweets(success:@escaping (_ response: [NSDictionary])->Void, failure: @escaping (_ error: Error) -> Void){
-        TwitterClient.sharedInstance?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        TwitterClient.sharedInstance?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: {(task: URLSessionDataTask, response: Any?) in
 //            print(task.debugDescription)
+            print(task.currentRequest ?? "")
             if let tweets = response as? [NSDictionary]{
                 success(tweets)
             }
