@@ -11,6 +11,8 @@ import UIKit
 protocol CellDelegate {
     func onTapCellLike(_ sender: AnyObject?)
     func onTapCellRetweet(_ sender: AnyObject?)
+    func onTapCellProfileImage(_ sender: AnyObject?)
+    func onTapCellReply(_ sender: AnyObject?)
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -129,6 +131,14 @@ class HomeTableViewCell: UITableViewCell {
         let tapLike = UITapGestureRecognizer(target: self, action: #selector(tappedLike(_:)))
         self.favoriteImageView.addGestureRecognizer(tapLike)
         self.favoriteImageView.isUserInteractionEnabled = true
+        
+        let tapProfileImage = UITapGestureRecognizer(target: self, action: #selector(onTappedProfileImage))
+        self.profileImageView.addGestureRecognizer(tapProfileImage)
+        self.profileImageView.isUserInteractionEnabled = true
+        
+        let tapReply = UITapGestureRecognizer(target: self, action: #selector(onTappedReply))
+        self.replyImageView.addGestureRecognizer(tapReply)
+        self.replyImageView.isUserInteractionEnabled = true
     }
     
     func tappedRetweet(_ sender: AnyObject){
@@ -138,6 +148,14 @@ class HomeTableViewCell: UITableViewCell {
     func tappedLike(_ sender: AnyObject){
         delegate?.onTapCellLike(sender)
         
+    }
+    
+    func onTappedProfileImage(_ sender: AnyObject){
+        delegate?.onTapCellProfileImage(sender)
+    }
+    
+    func onTappedReply(_ sender: AnyObject){
+        delegate?.onTapCellReply(sender)
     }
 }
 

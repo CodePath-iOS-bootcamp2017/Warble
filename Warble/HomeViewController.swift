@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, CellDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, CellDelegate, ComposeTweetDelegate {
 
     
     @IBOutlet weak var homeTableView: UITableView!
@@ -198,7 +198,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func onTapCellReply(_ sender: AnyObject?) {
+        performSegue(withIdentifier: "composeSegue", sender: sender)
+    }
     
+    func onTapCellProfileImage(_ sender: AnyObject?) {
+        performSegue(withIdentifier: "showProfileSegue", sender: sender)
+    }
+    
+    func onNewTweet(status: Tweet) {
+//        print("onNewTweet")
+        self.tweets?.insert(status, at: 0)
+//        print(self.tweets?[0])
+        self.homeTableView.reloadData()
+    }
     
     // MARK: - Navigation
 
@@ -211,6 +224,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let vc = segue.destination as! DetailsViewController
             vc.tweet = self.tweets?[(index?.row)!]
             vc.sourceRowNumber = index?.row
+        }else if segue.identifier == "showProfileSegue" {
+            if let recognizer = sender as? UITapGestureRecognizer{
+                let imageView = recognizer.view
+                if let cellView = imageView?.superview?.superview as? HomeTableViewCell {
+                    let indexPath = self.homeTableView.indexPath(for: cellView)
+                    if let row = indexPath?.row{
+                        if let tweet = self.tweets?[row]{
+                            let nc = segue.destination as! UINavigationController
+                            let vc = nc.topViewController as! ProfileViewController
+                            vc.user = tweet.user
+                        }
+                    }
+                }
+            }
+        }else if segue.identifier == "composeSegue" {
+            let nc = segue.destination as! UINavigationController
+            let vc = nc.topViewController as! ComposeViewController
+            vc.delegate = self
+            
+            if let recognizer = sender as? UITapGestureRecognizer{
+                let imageView = recognizer.view
+                if let cellView = imageView?.superview?.superview as? HomeTableViewCell {
+                    let indexPath = self.homeTableView.indexPath(for: cellView)
+                    if let row = indexPath?.row{
+                        if let tweet = self.tweets?[row]{
+                            vc.recepientUser = tweet.user
+                            vc.recepientTweetId = tweet.id
+                        }
+                    }
+                }
+            }
         }
     }
     

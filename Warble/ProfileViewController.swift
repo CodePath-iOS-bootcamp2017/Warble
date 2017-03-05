@@ -87,7 +87,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.tweetCountLabel.text = "\(tweetCount)"
             }
             
-            if let followingCount = user.followersCount{
+            if let followingCount = user.followingCount{
                 self.followingCountLabel.text = "\(followingCount)"
             }
             
@@ -122,6 +122,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.tweet = self.tweets?[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
