@@ -8,5 +8,6 @@ target 'Warble' do
   # Pods for Warble
     pod 'AFNetworking'
     pod 'BDBOAuth1Manager'
+    pod 'SVProgressHUD'
 
 end

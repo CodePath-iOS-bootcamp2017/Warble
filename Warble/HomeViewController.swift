@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, CellDelegate, ComposeTweetDelegate {
 
@@ -68,20 +69,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func loadFromNetwork(){
+        SVProgressHUD.show()
         TwitterClient.sharedInstance?.getHomeTimelineTweets(success: { (tweets: [NSDictionary]) in
 //             print(tweets)
             self.tweets = Tweet.createTweetArray(dictionaryArray: tweets)
 //            for tweet in self.tweets!{
 //                print(tweet.text)
 //            }
+            SVProgressHUD.dismiss()
             self.homeTableView.reloadData()
         }, failure: { (error: Error) in
             print(error.localizedDescription)
+            SVProgressHUD.dismiss()
         })
     }
     
     func loadMoreTweets(){
         if let tweetsCollection =  self.tweets{
+            
             TwitterClient.sharedInstance?.getHomeTimelineTweetsBefore(id: (tweetsCollection.last?.id)!, success: { (moreTweets: [NSDictionary]) in
                 self.tweets?.append(contentsOf: Tweet.createTweetArray(dictionaryArray: moreTweets))
                 self.homeTableView.reloadData()

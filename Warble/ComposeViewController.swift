@@ -118,6 +118,7 @@ class ComposeViewController: UIViewController, UINavigationControllerDelegate, U
         if let statusText = self.statusTextView.text{
             if !statusText.isEmpty{
                 if let statusId = self.recepientTweetId{
+                    
                     TwitterClient.sharedInstance?.replyToStatus(status: statusText, id: statusId, success: { (dictionary:NSDictionary) in
                         self.delegate?.onNewTweet(status: Tweet(dictionary: dictionary))
                         self.dismiss(animated: true, completion: nil)

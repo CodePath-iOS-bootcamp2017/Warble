@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -22,11 +23,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var user: User?
     var tweets: [Tweet]?
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
-        
+        self.configureRefreshControl()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +39,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBAction func onCloseTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func configureRefreshControl(){
+        self.refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        self.profileTableview.insertSubview(refreshControl, at: 0)
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl){
+        self.loadUserTweets()
+        refreshControl.endRefreshing()
     }
     
     func setupUI(){
@@ -84,29 +96,43 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             
             if let tweetCount = user.statusesCount{
-                self.tweetCountLabel.text = "\(tweetCount)"
+                self.tweetCountLabel.text = self.formatNumber(number: tweetCount)
             }
             
             if let followingCount = user.followingCount{
-                self.followingCountLabel.text = "\(followingCount)"
+                self.followingCountLabel.text = self.formatNumber(number: followingCount)
             }
             
             if let followerCount = user.followersCount{
-                self.followerCountLabel.text = "\(followerCount)"
+                self.followerCountLabel.text = self.formatNumber(number: followerCount)
             }
+        }
+    }
+    
+    func formatNumber(number: Int) -> String{
+        if number >= 1000000 {
+            let million = Float(number)/1000000
+            return String(format: "%.1f M", million)
+        }else if number >= 1000{
+            let grand = Float(number)/1000
+            return String(format: "%.1f K", grand)
+        }else{
+            return "\(number)"
         }
     }
     
     func loadUserTweets(){
         if let userId = self.user?.id{
+            SVProgressHUD.show()
             TwitterClient.sharedInstance?.getUserTimelineTweets(id: userId, success: { (dictionaryArr: [NSDictionary]) in
                 self.tweets = Tweet.createTweetArray(dictionaryArray: dictionaryArr)
                 self.profileTableview.reloadData()
+                SVProgressHUD.dismiss()
             }, failure: { (error: Error) in
                 print("Error getting user tweets: \(error.localizedDescription)")
+                SVProgressHUD.dismiss()
             })
         }
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
