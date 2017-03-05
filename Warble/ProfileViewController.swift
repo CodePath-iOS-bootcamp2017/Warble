@@ -55,6 +55,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.configureShowingUser()
         self.setupTableView()
         self.loadUserTweets()
+        navigationController?.navigationBar.barTintColor = UIColor(red: 0.3, green: 0.5, blue: 0.8, alpha: 1.0)
     }
     
     func setupTableView(){
@@ -153,14 +154,27 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    /*
+    
+    @IBAction func onLogoutTapped(_ sender: Any) {
+        TwitterClient.sharedInstance?.logoutCurrentUser()
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        //showDetailsSegue
+        if segue.identifier == "showDetailsSegue" {
+            let cell = sender as! HomeTableViewCell
+            let index = self.profileTableview.indexPath(for: cell)
+            
+            let vc = segue.destination as! DetailsViewController
+            vc.tweet = self.tweets?[(index?.row)!]
+            vc.sourceRowNumber = index?.row
+        }
+        
     }
-    */
+    
 
 }

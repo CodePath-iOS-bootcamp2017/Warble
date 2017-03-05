@@ -162,6 +162,16 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
         retweetedTapped.addTarget(self, action: #selector(onRetweetTapped))
         self.retweetImageView.addGestureRecognizer(retweetedTapped)
         self.retweetImageView.isUserInteractionEnabled = true
+        
+        let replyTapped = UITapGestureRecognizer()
+        replyTapped.addTarget(self, action: #selector(onReplyTapped))
+        self.replyImageView.addGestureRecognizer(replyTapped)
+        self.replyImageView.isUserInteractionEnabled = true
+        
+        let profileImageTapped = UITapGestureRecognizer()
+        profileImageTapped.addTarget(self, action: #selector(onProfileImageTapped))
+        self.profileImageView.addGestureRecognizer(profileImageTapped)
+        self.profileImageView.isUserInteractionEnabled = true
     }
     
     func onFavoriteTapped(_ sender: AnyObject){
@@ -212,6 +222,14 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
         }
     }
     
+    func onProfileImageTapped(_ sender: Any){
+        performSegue(withIdentifier: "showProfileSegue", sender: sender)
+    }
+    
+    func onReplyTapped(_ sender: Any){
+        performSegue(withIdentifier: "replySegue", sender: sender)
+    }
+    
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if let vc = viewController as? HomeViewController{
             if let row = self.sourceRowNumber{
@@ -220,14 +238,26 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
         }
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        //showProfileSegue
+        if segue.identifier == "showProfileSegue" {
+            let nc = segue.destination as! UINavigationController
+            let vc = nc.topViewController as! ProfileViewController
+            vc.user = self.tweet?.user
+        }else if segue.identifier == "replySegue" {
+            let nc = segue.destination as! UINavigationController
+            let vc = nc.topViewController as! ComposeViewController
+            vc.recepientUser = self.tweet?.user
+            vc.recepientTweetId = self.tweet?.id
+        }
+            
     }
-    */
+    
 
 }
