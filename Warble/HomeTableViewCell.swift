@@ -106,6 +106,8 @@ class HomeTableViewCell: UITableViewCell {
 //                print("media available")
                 self.mediaImageView.isHidden = false
                 self.mediaImageView.setImageWith(mediaUrl)
+                self.mediaImageView.layer.cornerRadius = 5
+                self.mediaImageView.layer.masksToBounds = true
             }else{
 //                print("media unavailable")
                 self.mediaImageView.isHidden = true

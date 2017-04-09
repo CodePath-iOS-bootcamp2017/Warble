@@ -53,7 +53,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
     func setScrollViewContentSize(){
         let contentWidth = self.enclosingScrollView.bounds.width
         let contentHeight = self.bottomMostView.frame.maxY + 100.0
-//        print(contentHeight)
+        print(contentHeight)
         self.enclosingScrollView.contentSize = CGSize(width: contentWidth, height: contentHeight)
     }
     
@@ -91,6 +91,8 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate, UINavigatio
         if let mediaUrl = self.tweet?.imageUrl{
             self.mediaImageView.isHidden = false
             self.mediaImageView.setImageWith(mediaUrl)
+            self.mediaImageView.layer.cornerRadius = 5
+            self.mediaImageView.layer.masksToBounds = true
         }else{
             self.mediaImageView.isHidden = true
         }
